@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>cz.joutsen.demo</groupId>
+  <artifactId>FxDemo</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <name>FxDemo</name>
+  <description>JavaFX+IDEA+Maven MWE.</description>
+  <url>https://github.com/jhlade/FxDemo</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.mainClass>cz.joutsen.demo.Launcher</project.mainClass>
+    <maven.compiler.source>18</maven.compiler.source>
+    <maven.compiler.target>18</maven.compiler.target>
+    <project.javafx.version>19</project.javafx.version>
+  </properties>
+
+  <build>
+    <finalName>${project.name}</finalName>
+
+    <plugins>
+      <!-- fat jar file -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <finalName>${project.name}-${project.version}</finalName>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>lib/</classpathPrefix>
+              <mainClass>${project.mainClass}</mainClass>
+            </manifest>
+            <manifestEntries>
+              <Built-By>${user.name}</Built-By>
+              <Build-Jdk>${java.version} (${java.vendor} ${java.vm.version})</Build-Jdk>
+              <Build-Timestamp>${maven.build.timestamp}}</Build-Timestamp>
+              <Build-OS>${os.name} ${os.arch} ${os.version}</Build-OS>
+            </manifestEntries>
+          </archive>
+          <appendAssemblyId>false</appendAssemblyId>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.source}</target>
+        </configuration>
+      </plugin>
+    </plugins>
+
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+
+  </build>
+
+  <dependencies>
+
+    <!-- JavaFX base -->
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-controls</artifactId>
+      <version>${project.javafx.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-fxml</artifactId>
+      <version>${project.javafx.version}</version>
+    </dependency>
+
+    <!-- MS Windows -->
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-graphics</artifactId>
+      <version>${project.javafx.version}</version>
+      <classifier>win</classifier>
+    </dependency>
+
+    <!-- GNU/Linux -->
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-graphics</artifactId>
+      <version>${project.javafx.version}</version>
+      <classifier>linux</classifier>
+    </dependency>
+
+    <!-- Apple macOS -->
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-graphics</artifactId>
+      <version>${project.javafx.version}</version>
+      <classifier>mac</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>[4.13.2,)</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+</project>
