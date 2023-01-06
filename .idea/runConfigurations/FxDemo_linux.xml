@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="FxDemo-linux" type="Application" factoryName="Application">
+    <classpathModifications>
+      <entry exclude="true" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/19/javafx-graphics-19-mac.jar" />
+      <entry exclude="true" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/19/javafx-graphics-19-win.jar" />
+    </classpathModifications>
+    <option name="MAIN_CLASS_NAME" value="cz.joutsen.demo.App" />
+    <module name="FxDemo" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
